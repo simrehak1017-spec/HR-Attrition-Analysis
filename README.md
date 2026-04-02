@@ -1,4 +1,4 @@
-# HR Attrition Analysis - HR Portfolio
+# HR Portfolio - HR Attrition Analysis
 
 ## 📌 Overview
 This project analyzes employee attrition using HR data to identify key drivers and provide HR insights.
