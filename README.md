@@ -21,9 +21,11 @@ https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
 - Sales representatives have higher attrition compared to other roles (~2.5x)
 
 @ Sales Role (Deep Dive)
+- Sales representatives who work overtime are about 11 times more likely to leave
+- Frequent Business travel increases attrition risk by approximately 7 times
 - Job involvement is negatively associated with attrition
 - Job satisfaction is negatively associated with attrition
-- Employees with lower engagement and satisfaction show higher turnover risk
+
 
 ## 💡 HR Implications
 - Implement overtime control policies
