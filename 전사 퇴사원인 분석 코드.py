@@ -4,13 +4,13 @@ import statsmodels.api as sm
 df = pd.read_csv("HR-Employee-Attrition.csv")
 df["Attrition"] = df["Attrition"].map({"Yes":1,"No":0})
 df["OverTime"] = df["OverTime"].map({"Yes":1,"No":0})
-df = df.drop(columns=["Over18","EmployeeNumber","EmployeeCount","StandardHours"])
+df = df.drop(columns=["Over18","EmployeeNumber","EmployeeCount","StandardHours","YearsInCurrentRole","YearsWithCurrManager"])
 df = pd.get_dummies(df, columns=["BusinessTravel","Department","EducationField","Gender","JobRole","MaritalStatus"], drop_first=True, dtype=int)
 print(df.corr(numeric_only=True)["Attrition"].sort_values(ascending=False))
 
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-X = df[["Age","TotalWorkingYears","MonthlyIncome","JobLevel","YearsInCurrentRole","YearsWithCurrManager"]].astype(float)
+X = df[["Age","TotalWorkingYears","MonthlyIncome","JobLevel"]].astype(float)
 
 vif = pd.DataFrame()
 vif["feature"] = X.columns
@@ -22,7 +22,7 @@ print(vif)
 import numpy as np
 import statsmodels.api as sm
 
-X_logit = df[["OverTime","MaritalStatus_Single","JobRole_Sales Representative","TotalWorkingYears","MonthlyIncome","YearsInCurrentRole"]].astype(float)
+X_logit = df[["OverTime","MaritalStatus_Single","JobRole_Sales Representative","TotalWorkingYears","MonthlyIncome"]].astype(float)
 y = df["Attrition"].astype(int)
 
 X_logit = sm.add_constant(X_logit)
@@ -39,6 +39,3 @@ print(odds_ratio)
 significant = odds_ratio[odds_ratio["P_value"] < 0.05]
 print("\nSignificant Variables (p < 0.05)")
 print(significant)
-
-# 전처리가 완료된 df를 csv로 내보내기
-df.to_csv('hr_processed_for_pbi.csv', index=False, encoding='utf-8-sig')
